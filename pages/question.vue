@@ -2,10 +2,11 @@
   <div class="container">
     <h1 class="title">{{question}}</h1>
     <h2 class="sub-title">아래 항목을 선택해 주세요.</h2>
-    <section class="answer-wrap">
+    <section class="answer-wrap"
+             :class="{two: answers.length === 2}">
       <button class="answer"
-              :class="{half: setHalf, selected: selected === answer, right: index % 2 === 1, up: answers.length === 4 && index === 1 }"
-              v-for="(answer, index) in answers"
+              :class="{selected: answer === selected}"
+              v-for="answer in answers"
               :key="answer.id"
               @click="setNextId(answer)">
         {{answer.description}}
@@ -48,15 +49,23 @@ export default {
     },
     clickNext() {
       const answer = this.selected
-      console.log(answer)
-      if (!answer.targetUrl) {
+      if (!answer.isLeaf) {
         this.answer_list.push(answer.id)
         this.getQuestion(answer.nextQuestionId)
       } else {
         if (/search/.test(answer.targetUrl)) {
           this.$router.push('/search')
         } else if (answer.targetUrl) {
-          console.log(answer.targetUrl)
+          this.$router.push({
+            path: '/result',
+            props: { key: answer.targetUrl, keys: '' }
+          })
+        } else {
+          const answer_ids = this.answer_list.join(',')
+          this.$router.push({
+            path: '/result',
+            props: { key: '', keys: answer_ids }
+          })
         }
       }
     },
@@ -64,7 +73,6 @@ export default {
       if (this.answer_list.pop()) this.$router.back()
     },
     getQuestion(id) {
-      console.log(id)
       api.get(`questions/next?parent_id=${id}`).then(res => {
         const data = res.data
         this.question = data.question
@@ -106,10 +114,8 @@ $width: 80%;
     grid-template-rows: repeat(2, 50%);
     grid-gap: 1vw;
     .answer {
-      // display: inline-block;
       width: 100%;
       text-align: center;
-      // height: 49%;
       background-color: #fff;
       border: 0;
       font-size: 1rem;
@@ -117,21 +123,9 @@ $width: 80%;
     .answer:focus {
       outline: 0;
     }
-    // .answer:first-child {
-    //   margin-bottom: 2%;
-    // }
     .answer.selected {
       background-color: #82aa12;
     }
-    // .answer.half {
-    //   width: 49%;
-    // }
-    // .answer.half.up {
-    //   margin-bottom: 2%;
-    // }
-    // .answer.half.right {
-    //   margin-left: 2%;
-    // }
   }
   .answer-wrap.two {
     grid-template-columns: 100%;

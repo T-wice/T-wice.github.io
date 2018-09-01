@@ -24,6 +24,9 @@ html {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
+body {
+  position: fixed;
+}
 *,
 *:before,
 *:after {
@@ -31,11 +34,11 @@ html {
   box-sizing: border-box;
   margin: 0;
   letter-spacing: -0.3px;
-  overflow: hidden;
 }
 #__layout {
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 .page-enter-active,
 .page-leave-active {

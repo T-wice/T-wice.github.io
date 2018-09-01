@@ -17,12 +17,25 @@
 import HeaderBar from '~/components/result/HeaderBar.vue'
 import HerbCard from '~/components/result/HerbCard.vue'
 import HerbDetailBox from '~/components/result/HerbDetailBox.vue'
+import api from '../api/api.js'
 
 export default {
   components: {
     HeaderBar,
     HerbCard,
     HerbDetailBox
+  },
+  props: ['key', 'keys'],
+  mounted() {
+    if (this.keys !== '') {
+      api.get(`teas?answer_ids=${this.keys}`).then(res => {
+        console.log(res.data)
+      })
+    } else {
+      api.get(`teas?tea_id=${this.key}`).then(res => {
+        console.log(res.data)
+      })
+    }
   }
 }
 </script>

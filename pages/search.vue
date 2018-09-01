@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import api from '../api/api.js'
+
 export default {
   data() {
     return {
@@ -22,7 +24,9 @@ export default {
   },
   methods: {
     search() {
-      console.log(this.keyword)
+      api.get(`teas?keyword=${this.keyword}`).then(res => {
+        console.log(res.data)
+      })
     }
   }
 }
