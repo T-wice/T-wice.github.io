@@ -3,8 +3,8 @@
     <div>
       <el-tag>1위</el-tag>
     </div>
-    <div class="img">
-      <img :src="imgUrl">
+    <div class="img"
+         :style="{backgroundImage: `url('${imgUrl}')`}">
     </div>
     <div class="title">{{name}}</div>
     <div class="desc"
@@ -39,32 +39,29 @@ export default {
 $margin: 27px;
 
 .card {
+  grid-area: herb-card;
   display: grid;
-  grid-template-rows: 80px auto auto auto;
+  grid-template-rows: 58px auto auto auto;
   width: calc(100% - #{$margin * 2});
-  height: calc(100% - #{$margin * 2});
-  margin: 16px auto;
+  height: calc(100% - 10 * 2);
+  margin: 10px $margin;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   background-color: white;
   .el-tag {
-    margin: 25px;
+    margin: 20px;
     padding: 0 14px;
     font-weight: 300;
     background-color: #82aa12;
     border-radius: 100px;
   }
   .img {
-    margin: 16px;
+    margin: 0px 16px;
+    border: 0px;
     width: calc(100% - 32px);
     min-height: 173px;
-    // background-image: url('/herb1.png');
-    // background-size: 100%;
-    // background-repeat: no-repeat;
-    img {
-      width: 100%;
-      height: 100%;
-    }
+    background-size: 100%;
+    background-repeat: no-repeat;
   }
   .title {
     font-size: 28px;
@@ -76,12 +73,11 @@ $margin: 27px;
     font-weight: 300;
     margin: 25px;
     margin-top: 0px;
+    max-height: 80px;
     color: #999999;
-    height: 9vh;
-    overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
     line-height: 0.9rem;
+    overflow: scroll;
   }
 }
 </style>

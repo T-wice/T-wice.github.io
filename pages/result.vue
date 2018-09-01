@@ -95,13 +95,15 @@ export default {
     }
   }
   .herb-detail {
+    grid-area: herb-detail;
     display: grid;
     grid-auto-flow: column;
     justify-content: space-between;
     // grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 15px;
     margin-left: 30px;
     margin-right: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
   }
 }
 </style>
