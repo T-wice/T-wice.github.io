@@ -18,7 +18,6 @@
 
 <script>
 import FooterButton from '~/components/question/FooterButton.vue'
-
 export default {
   name: '',
   data() {

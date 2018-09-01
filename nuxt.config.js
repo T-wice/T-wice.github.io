@@ -11,7 +11,17 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: pkg.description },
+      { property: 'og:title', content: 'T-wice(티와이스)' },
+      {
+        property: 'og:description',
+        content: '차를 사랑하는 디지털 노마드를 위한 셀프 가드닝 헬퍼'
+      },
+      {
+        property: 'og:image',
+        content:
+          'https://images.unsplash.com/photo-1521623525276-1ba1f025cbaa?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49aaa53cc086c42baad42b10d59d11d9&auto=format&fit=crop&w=2500&q=80'
+      }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

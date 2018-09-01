@@ -40,6 +40,7 @@ export default {
 }
 .search {
   width: 80vw;
+  max-width: 500px;
 }
 .logo {
   margin: 15vh 0 10vh;
