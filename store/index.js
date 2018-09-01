@@ -23,5 +23,10 @@ export const actions = {
     api.get(`teas/${result}`).then(res => {
       commit('setResult', res.data)
     })
+  },
+  search({ commit }, keyword) {
+    api.get(`teas?keyword=${this.keyword}`).then(res => {
+      commit('setResults', res.data)
+    })
   }
 }

@@ -20,6 +20,7 @@
 <script>
 import FooterButton from '~/components/question/FooterButton.vue'
 import api from '../api/api.js'
+
 export default {
   name: '',
   data() {
@@ -63,7 +64,6 @@ export default {
             path: '/result'
           })
         } else {
-          debugger
           const answer_ids = this.answer_list.join(',')
           this.$store.dispatch('setResults', answer_ids)
           this.$router.push({

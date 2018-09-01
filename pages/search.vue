@@ -24,9 +24,10 @@ export default {
   },
   methods: {
     search() {
-      api.get(`teas?keyword=${this.keyword}`).then(res => {
-        console.log(res.data)
-      })
+      this.$store.dispatch('search', this.keyword)
+      // this.$router.push({
+      //   path: '/result'
+      // })
     }
   }
 }
