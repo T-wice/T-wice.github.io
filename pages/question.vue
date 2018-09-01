@@ -28,7 +28,8 @@ export default {
       answers: [],
       next_id: 0,
       selected: false,
-      answer_list: []
+      answer_list: [],
+      answers_list: []
     }
   },
   computed: {
@@ -41,6 +42,7 @@ export default {
       const data = res.data
       this.question = data.question
       this.answers = data.answers
+      this.answers_list.push(data.answers)
     })
   },
   methods: {
@@ -49,37 +51,30 @@ export default {
     },
     clickNext() {
       const answer = this.selected
+      this.answer_list.push(answer.id)
       if (!answer.isLeaf) {
-        this.answer_list.push(answer.id)
         this.getQuestion(answer.nextQuestionId)
       } else {
         if (/search/.test(answer.targetUrl)) {
           this.$router.push('/search')
         } else if (answer.targetUrl) {
+          this.$store.dispatch('setResult', answer.targetUrl)
           this.$router.push({
-            path: '/result',
-            props: { key: answer.targetUrl, keys: '' }
+            path: '/result'
           })
         } else {
           const answer_ids = this.answer_list.join(',')
+          this.$store.dispatch('setResults', answer_ids)
           this.$router.push({
-            path: '/result',
-            props: { key: '', keys: answer_ids }
+            path: '/result'
           })
         }
       }
     },
     clickPrev() {
-      if (this.answer_list.pop()) {
-        if (this.answer_list.length > 1) {
-          this.getQuestion(this.answer_list[this.answer_list.length - 2])
-        } else {
-          api.get('questions/next').then(res => {
-            const data = res.data
-            this.question = data.question
-            this.answers = data.answers
-          })
-        }
+      this.answer_list.pop()
+      if (this.answers_list.pop() && this.answers_list.length > 0) {
+        this.answers = this.answers_list[this.answers_list.length - 1]
       }
     },
     getQuestion(id) {
@@ -87,6 +82,7 @@ export default {
         const data = res.data
         this.question = data.question
         this.answers = data.answers
+        this.answers_list.push(data.answers)
       })
     }
   },

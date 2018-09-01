@@ -25,18 +25,14 @@ export default {
     HerbCard,
     HerbDetailBox
   },
-  props: ['key', 'keys'],
-  mounted() {
-    if (this.keys !== '') {
-      api.get(`teas?answer_ids=${this.keys}`).then(res => {
-        console.log(res.data)
-      })
-    } else {
-      api.get(`teas?tea_id=${this.key}`).then(res => {
-        console.log(res.data)
-      })
+  computed: {
+    result() {
+      console.log(this.$store.state.results[0])
+      return this.$store.state.results[0]
     }
-  }
+  },
+
+  mounted() {}
 }
 </script>
 
