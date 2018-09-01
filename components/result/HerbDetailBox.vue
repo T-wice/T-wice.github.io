@@ -15,10 +15,10 @@ export default {
       default: '성장 기간'
     },
     value: {
-      default: '10'
+      // default: '10'
     },
     unit: {
-      default: '원'
+      // default: '원'
     }
   }
 }

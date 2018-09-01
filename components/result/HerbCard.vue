@@ -4,23 +4,33 @@
       <el-tag>1위</el-tag>
     </div>
     <div class="img">
-      <img :src="data.imgUrl">
+      <img :src="imgUrl">
     </div>
-    <div class="title">{{data.name}}</div>
+    <div class="title">{{name}}</div>
     <div class="desc"
-         v-html="data.description">
+         v-html="description">
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  computed: {
-    data() {
-      const result = this.$store.state.results[0]
-      return result !== undefined ? result : {}
-    }
-  }
+  props: ['imgUrl', 'name', 'description']
+  // data() {
+  //   return {
+  //     data: {
+  //       imgUrl: '',
+  //       name: '',
+  //       description: ''
+  //     }
+  //   }
+  // }
+  // computed: {
+  //   data() {
+  //     const result = this.$store.state.results[0]
+  //     return result !== undefined ? result : {}
+  //   }
+  // }
 }
 </script>
 

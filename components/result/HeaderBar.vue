@@ -1,6 +1,7 @@
 <template>
   <div class="header">
-    <div class="icon"></div>
+    <div class="icon"
+         @click="$router.push('/')"></div>
   </div>
 </template>
 

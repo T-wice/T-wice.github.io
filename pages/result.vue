@@ -5,10 +5,11 @@
       <div class="small">당신에게 꼭 맞는</div>
       <div class="big">허브 추천</div>
     </div>
-    <herb-card></herb-card>
+    <herb-card v-bind="herb"></herb-card>
     <div class="herb-detail">
-      <herb-detail-box v-for="n in 3"
-                       :key="n"></herb-detail-box>
+      <herb-detail-box v-for="detail in details"
+                       :key="detail.text"
+                       v-bind="detail"></herb-detail-box>
     </div>
   </div>
 </template>
@@ -20,18 +21,50 @@ import HerbDetailBox from '~/components/result/HerbDetailBox.vue'
 import api from '../api/api.js'
 
 export default {
+  data() {
+    return {
+      herb: {},
+      details: [
+        {
+          desc: '성장 기간',
+          // value: 10,
+          unit: '일'
+        },
+        {
+          desc: '물주기(하루)',
+          // value: 3,
+          unit: '회'
+        },
+        {
+          desc: '난이도',
+          // value: '상',
+          unit: ''
+        }
+      ]
+    }
+  },
+  async mounted() {
+    const { data } = await api.get('teas')
+    console.log(data[0])
+    this.details[0].value = data[0].duration
+    this.details[1].value = data[0].waterPerDay
+    this.details[2].value = data[0].level
+    if (this.details[2].value === 0) {
+      this.details[2].value = '하'
+    }
+    if (this.details[2].value === 1) {
+      this.details[2].value = '중'
+    }
+    if (this.details[2].value === 2) {
+      this.details[2].value = '상'
+    }
+    this.herb = data[0]
+  },
   components: {
     HeaderBar,
     HerbCard,
     HerbDetailBox
-  },
-  computed: {
-    result() {
-      return this.$store.state.results[0]
-    }
-  },
-
-  mounted() {}
+  }
 }
 </script>
 
