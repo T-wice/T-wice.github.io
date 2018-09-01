@@ -3,13 +3,27 @@
     <div>
       <el-tag>1위</el-tag>
     </div>
-    <div class="img"></div>
-    <div class="title">페퍼민트</div>
-    <div class="desc">
-      높이 90㎝이다. 줄기는 뿌리에서 나와 곧추서거나 위로 올라가며, 땅에 뿌리를 내리며...
+    <div class="img">
+      <img :src="data.imgUrl">
+    </div>
+    <div class="title">{{data.name}}</div>
+    <div class="desc"
+         v-html="data.description">
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    data() {
+      const result = this.$store.state.results[0]
+      return result !== undefined ? result : {}
+    }
+  }
+}
+</script>
+
 
 <style lang="scss" scoped>
 $margin: 27px;
@@ -34,9 +48,13 @@ $margin: 27px;
     margin: 16px;
     width: calc(100% - 32px);
     min-height: 173px;
-    background-image: url('/herb1.png');
-    background-size: 100%;
-    background-repeat: no-repeat;
+    // background-image: url('/herb1.png');
+    // background-size: 100%;
+    // background-repeat: no-repeat;
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
   .title {
     font-size: 28px;
@@ -49,6 +67,11 @@ $margin: 27px;
     margin: 25px;
     margin-top: 0px;
     color: #999999;
+    height: 9vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 0.9rem;
   }
 }
 </style>

@@ -27,7 +27,6 @@ export default {
   },
   computed: {
     result() {
-      console.log(this.$store.state.results[0])
       return this.$store.state.results[0]
     }
   },

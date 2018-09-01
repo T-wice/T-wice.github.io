@@ -25,7 +25,7 @@ export const actions = {
     })
   },
   search({ commit }, keyword) {
-    api.get(`teas?keyword=${this.keyword}`).then(res => {
+    api.get(`teas?keyword=${keyword}`).then(res => {
       commit('setResults', res.data)
     })
   }

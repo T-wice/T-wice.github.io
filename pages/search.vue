@@ -8,7 +8,7 @@
               @keypress.enter="search">
       <el-button slot="append"
                  icon="el-icon-search"
-                 @click="search"></el-button>
+                 @click="search">Search</el-button>
     </el-input>
   </div>
 </template>
@@ -25,9 +25,9 @@ export default {
   methods: {
     search() {
       this.$store.dispatch('search', this.keyword)
-      // this.$router.push({
-      //   path: '/result'
-      // })
+      this.$router.push({
+        path: '/result'
+      })
     }
   }
 }
@@ -45,7 +45,7 @@ export default {
 }
 .search {
   width: 80vw;
-  max-width: 500px;
+  max-width: 450px;
 }
 .logo {
   margin: 15vh 0 10vh;

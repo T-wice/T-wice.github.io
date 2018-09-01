@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'https://rare-wasp-27.localtunnel.me/'
+const API_URL = 'https://twice.localtunnel.me/'
 
 export default {
   init() {
