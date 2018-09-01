@@ -14,28 +14,29 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'
+      }
     ]
   },
 
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#3B8070' },
+  loading: false,
 
   /*
   ** Global CSS
   */
-  css: [
-    'element-ui/lib/theme-default/index.css'
-  ],
+  css: ['element-ui/lib/theme-default/index.css'],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-    '@/plugins/element-ui'
-  ],
+  plugins: ['@/plugins/element-ui'],
 
   /*
   ** Nuxt.js modules
