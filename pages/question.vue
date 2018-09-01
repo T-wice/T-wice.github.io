@@ -70,7 +70,17 @@ export default {
       }
     },
     clickPrev() {
-      if (this.answer_list.pop()) this.$router.back()
+      if (this.answer_list.pop()) {
+        if (this.answer_list.length > 1) {
+          this.getQuestion(this.answer_list[this.answer_list.length - 2])
+        } else {
+          api.get('questions/next').then(res => {
+            const data = res.data
+            this.question = data.question
+            this.answers = data.answers
+          })
+        }
+      }
     },
     getQuestion(id) {
       api.get(`questions/next?parent_id=${id}`).then(res => {
