@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import api from '../api/api.js'
+
 export default {
   mounted() {
     setTimeout(() => {

@@ -35,6 +35,8 @@ $base: 92px;
     margin: 6px;
     text-align: center;
     font-size: 14px;
+    font-weight: 300;
+    line-height: 8px;
     color: #999999;
   }
   .value {

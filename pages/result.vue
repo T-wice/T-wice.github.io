@@ -46,9 +46,11 @@ export default {
     font-size: 32px;
     .small {
       font-size: 15px;
+      color: #999999;
+      font-weight: 300;
     }
     .big {
-      line-height: 47px;
+      line-height: 40px;
     }
   }
   .herb-detail {

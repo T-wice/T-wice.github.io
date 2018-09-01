@@ -8,6 +8,6 @@ export default {
     axios.defaults.headers.get['Content-Type'] = 'application/json'
   },
   get(resource, params) {
-    axios.get(resource, params)
+    return axios.get(resource, params)
   }
 }

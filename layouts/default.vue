@@ -2,6 +2,16 @@
   <nuxt/>
 </template>
 
+<script>
+import api from '../api/api.js'
+
+export default {
+  created() {
+    api.init()
+  }
+}
+</script>
+
 <style lang="scss">
 html {
   font-family: 'Noto Sans CJK KR', -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -17,9 +27,11 @@ html {
 *,
 *:before,
 *:after {
+  -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
   margin: 0;
   letter-spacing: -0.3px;
+  overflow: hidden;
 }
 #__layout {
   display: flex;

@@ -4,7 +4,7 @@
     <h2 class="sub-title">아래 항목을 선택해 주세요.</h2>
     <section class="answer-wrap">
       <button class="answer"
-              :class="{half: setHalf, selected: selected === answer, left: index % 2 === 0}"
+              :class="{half: setHalf, selected: selected === answer, right: index % 2 === 1, up: answers.length === 4 && index === 1 }"
               v-for="(answer, index) in answers"
               :key="answer.id"
               @click="setNextId(answer)">
@@ -18,61 +18,58 @@
 
 <script>
 import FooterButton from '~/components/question/FooterButton.vue'
+import api from '../api/api.js'
 export default {
   name: '',
   data() {
     return {
-      question: '차에 대해 얼마나 아시나요?',
-      answers: [
-        {
-          id: 1,
-          isLeaf: true,
-          description: '차를 키워서 마셔봤어요.',
-          targetUrl: 'http://www.naver.com',
-          next_id: 11
-        },
-        {
-          id: 2,
-          isLeaf: false,
-          description: '차는 마셔보기만 했어요.',
-          next_id: 12
-        },
-        {
-          id: 3,
-          isLeaf: false,
-          description: '차는 마셔보기만 했어요.',
-          next_id: 12
-        },
-        {
-          id: 4,
-          isLeaf: false,
-          description: '차는 마셔보기만 했어요.',
-          next_id: 12
-        }
-      ],
+      question: '',
+      answers: [],
       next_id: 0,
-      selected: false
+      selected: false,
+      answer_list: []
     }
   },
-  created() {},
   computed: {
     setHalf() {
       return this.answers.length >= 3
     }
+  },
+  mounted() {
+    api.get('questions/next').then(res => {
+      const data = res.data
+      this.question = data.question
+      this.answers = data.answers
+    })
   },
   methods: {
     setNextId(answer) {
       this.selected = answer
     },
     clickNext() {
-      if (this.selected) console.log(this.selected.id)
-      else console.log('not selected')
-
-      //sample
-      this.$router.push('/search')
+      const answer = this.selected
+      console.log(answer)
+      if (!answer.targetUrl) {
+        this.answer_list.push(answer.id)
+        this.getQuestion(answer.nextQuestionId)
+      } else {
+        if (/search/.test(answer.targetUrl)) {
+          this.$router.push('/search')
+        } else if (answer.targetUrl) {
+          console.log(answer.targetUrl)
+        }
+      }
     },
     clickPrev() {
-      this.$router.back()
+      if (this.answer_list.pop()) this.$router.back()
+    },
+    getQuestion(id) {
+      console.log(id)
+      api.get(`questions/next?parent_id=${id}`).then(res => {
+        const data = res.data
+        this.question = data.question
+        this.answers = data.answers
+      })
     }
   },
   components: {
@@ -104,11 +101,15 @@ $width: 80%;
   .answer-wrap {
     width: 80%;
     height: 52vh;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: repeat(2, 50%);
+    grid-gap: 1vw;
     .answer {
-      display: inline-block;
+      // display: inline-block;
       width: 100%;
       text-align: center;
-      height: 49%;
+      // height: 49%;
       background-color: #fff;
       border: 0;
       font-size: 1rem;
@@ -116,18 +117,24 @@ $width: 80%;
     .answer:focus {
       outline: 0;
     }
-    .answer:nth-child(odd) {
-      margin-bottom: 2%;
-    }
+    // .answer:first-child {
+    //   margin-bottom: 2%;
+    // }
     .answer.selected {
       background-color: #82aa12;
     }
-    .answer.half {
-      width: 49%;
-    }
-    .answer.half.left {
-      margin-right: 2%;
-    }
+    // .answer.half {
+    //   width: 49%;
+    // }
+    // .answer.half.up {
+    //   margin-bottom: 2%;
+    // }
+    // .answer.half.right {
+    //   margin-left: 2%;
+    // }
+  }
+  .answer-wrap.two {
+    grid-template-columns: 100%;
   }
   .footer {
     position: absolute;

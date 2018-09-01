@@ -19,12 +19,14 @@ $margin: 27px;
   grid-template-rows: 80px auto auto auto;
   width: calc(100% - #{$margin * 2});
   height: calc(100% - #{$margin * 2});
-  margin: $margin;
+  margin: 16px auto;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   background-color: white;
   .el-tag {
     margin: 25px;
+    padding: 0 14px;
+    font-weight: 300;
     background-color: #82aa12;
     border-radius: 100px;
   }
@@ -43,8 +45,10 @@ $margin: 27px;
   }
   .desc {
     font-size: 16px;
+    font-weight: 300;
     margin: 25px;
     margin-top: 0px;
+    color: #999999;
   }
 }
 </style>
