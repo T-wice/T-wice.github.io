@@ -63,6 +63,7 @@ export default {
             path: '/result'
           })
         } else {
+          debugger
           const answer_ids = this.answer_list.join(',')
           this.$store.dispatch('setResults', answer_ids)
           this.$router.push({
