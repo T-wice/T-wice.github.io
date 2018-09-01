@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="logo"></div>
-    <el-input placeholder="차를 입력해주세요."
+    <el-input class="search"
+              placeholder="차를 입력해주세요."
               v-model="keyword"
               clearable
               @keypress.enter="search">
@@ -36,6 +37,9 @@ export default {
   width: 100vw;
   height: 100vh;
   background-color: #dddfd2;
+}
+.search {
+  width: 80vw;
 }
 .logo {
   margin: 15vh 0 10vh;
